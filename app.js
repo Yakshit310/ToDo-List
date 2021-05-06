@@ -18,21 +18,21 @@ const itemSchema = {
 
 const Item = mongoose.model("Item",itemSchema);
 
-const i1 = new Item({
-    name : "Buy Food",
-})
-const i2 = new Item({
-    name : "Cook Food",
-})
-const i3 = new Item({
-    name : "Eat Food",
-})
+// const i1 = new Item({
+//     name : "Buy Food",
+// })
+// const i2 = new Item({
+//     name : "Cook Food",
+// })
+// const i3 = new Item({
+//     name : "Eat Food",
+// })
 
-const i4 = new Item({
-    name : "Work",
-})
+// const i4 = new Item({
+//     name : "Work",
+// })
 
-const defautArray = [i1,i2,i3];
+const defaultArray = [];
 
 const listSchema = {
     name : String,
@@ -45,17 +45,17 @@ app.get("/",(req,res)=>{
 
     Item.find({},(err,items)=>{
         
-        if(items.length === 0){
-            Item.insertMany(defautArray,(err)=>{
-                if(err)
-                    console.log("error");
-                else
-                    console.log("Successfully created the item database");
-            })
+        // if(items.length === 0){
+        //     Item.insertMany(defaultArray,(err)=>{
+        //         if(err)
+        //             console.log("error");
+        //         else
+        //             console.log("Successfully created the item database");
+        //     })
 
-            res.redirect("/");
-        }
-        else
+        //     res.redirect("/");
+        // }
+        // else
             res.render("list",{ListTitle : "Today" ,  newListItems : items});
     });
 
@@ -69,7 +69,7 @@ app.get("/:customListName",(req,res)=>{
         if(result === null){
             const list = new List({
                 name : customListName,
-                items : defautArray,
+                items : defaultArray,
             })
 
             list.save();
